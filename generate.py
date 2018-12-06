@@ -42,7 +42,8 @@ if args.padding > 0:
 image = xp.asarray(image)
 x = Variable(image)
 
-y = model(x)
+with chainer.using_config('train', False):
+    y = model(x)
 result = cuda.to_cpu(y.data)
 
 if args.padding > 0:
